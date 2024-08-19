@@ -1,0 +1,23 @@
+services:
+  sap-hanaexpress:
+    container_name: "parteincerta-sap-hanaexpress-${TAG}"
+    image: "${IMAGE}:${TAG}"
+    build:
+      context: build
+      args:
+        IMAGE: "${IMAGE}"
+        TAG: "${TAG}"
+    init: true
+    ports:
+      - 1128-1129:1128-1129
+      - 39013:39013
+      - 39017:39017
+      - 39041-39045:39041-39045
+      - 59013-59014:59013-59014
+    volumes:
+      - sap-hanaexpress:/hana/mounts
+    network_mode: bridge
+
+volumes:
+  sap-hanaexpress:
+    name: parteincerta-sap-hanaexpress

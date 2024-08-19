@@ -1,0 +1,20 @@
+services:
+  vertica:
+    container_name: "parteincerta-vertica-${TAG}"
+    image: "${IMAGE}:${TAG}-${TAG_EXTRA}"
+    init: true
+    ports:
+      - 5433:5433
+      - 5444:5444
+    volumes:
+      - vertica:/data
+    environment:
+      - APP_DB_USER=${APP_DB_USER}
+      - APP_DB_PASSWORD=${APP_DB_PASSWORD}
+      - TZ=${TZ}
+      - VERTICA_MEMDEBUG=${VERTICA_MEMDEBUG}
+    network_mode: bridge
+
+volumes:
+  vertica:
+    name: parteincerta-vertica
